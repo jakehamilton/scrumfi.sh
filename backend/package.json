@@ -1,0 +1,24 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "The backend for scrumfi.sh.",
+    "main": "index.js",
+    "scripts": {
+        "dev": "LOG_LEVEL=TRACE nodemon ./src/index.js",
+        "start": "node ./src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "github.com/jakehamilton/scrumfi.sh"
+    },
+    "author": "Jake Hamilton <jake.hamilton@hey.com>",
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@leverage/core": "^3.0.0",
+        "@leverage/plugin-http": "^3.1.0",
+        "@leverage/plugin-websocket": "^1.0.1",
+        "@littlethings/log": "^1.3.1",
+        "nodemon": "^2.0.4",
+        "unique-names-generator": "^4.3.1"
+    }
+}

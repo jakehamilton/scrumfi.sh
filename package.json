@@ -1,0 +1,48 @@
+{
+    "name": "scrumfi.sh",
+    "version": "1.0.0",
+    "description": "A helper for determining ticket points.",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jakehamilton/scrumfi.sh.git"
+    },
+    "author": "Jake Hamilton <jake.hamilton@hey.com>",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/jakehamilton/scrumfi.sh/issues"
+    },
+    "homepage": "https://github.com/jakehamilton/scrumfi.sh#readme",
+    "prettier": {
+        "tabWidth": 4
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged --allow-empty",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "lint-staged": {
+        "*.{js,jsx,json}": "prettier --write"
+    },
+    "scripts": {
+        "dev": "npm run dev:frontend & npm run dev:backend",
+        "dev:frontend": "npm run --prefix ./frontend dev",
+        "dev:backend": "npm run --prefix ./backend dev",
+        "postinstall": "npm run install:frontend & npm run install:backend",
+        "install:frontend": "npm --prefix ./frontend install",
+        "install:backend": "npm --prefix ./backend install"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^11.0.0",
+        "@commitlint/config-conventional": "^11.0.0",
+        "husky": "^4.3.0",
+        "lint-staged": "^10.4.0",
+        "prettier": "^2.1.2"
+    }
+}
