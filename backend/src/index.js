@@ -16,6 +16,8 @@ const main = async () => {
 
     manager.add(http, websocket);
 
+    manager.add(require("./middleware/http/static"));
+
     manager.add(require("./services/names"), require("./services/rooms"));
 
     manager.add(
@@ -43,6 +45,11 @@ const main = async () => {
             }
             process.exit(0);
         });
+        setTimeout(() => {
+            log.error("Could not close server gracefully.");
+            log.error("Killing process.");
+            process.exit(1);
+        }, 3000);
     };
 
     process.on("SIGINT", cleanup);

@@ -31,9 +31,11 @@
         "*.{js,jsx,json}": "prettier --write"
     },
     "scripts": {
+        "start": "npm run --prefix ./backend start",
         "dev": "npm run dev:frontend & npm run dev:backend",
         "dev:frontend": "npm run --prefix ./frontend dev",
         "dev:backend": "npm run --prefix ./backend dev",
+        "build": "npm run --prefix ./frontend build",
         "postinstall": "npm run install:frontend & npm run install:backend",
         "install:frontend": "npm --prefix ./frontend install",
         "install:backend": "npm --prefix ./backend install"

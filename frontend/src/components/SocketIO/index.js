@@ -9,7 +9,7 @@ export const SOCKET_IO_CONTEXT = createContext({
 const SocketIO = ({
     host = window.location.host,
     path = "",
-    port = "3001",
+    port = "",
     children,
 }) => {
     const [user, setUser] = useState({
@@ -18,7 +18,7 @@ const SocketIO = ({
     });
 
     const socket = useMemo(() => {
-        const socket = io(`${host}:${port}${path}`, {
+        const socket = io(`${host}${port ? `:${port}` : ""}${path}`, {
             host,
             path,
             port,
