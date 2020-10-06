@@ -42,8 +42,6 @@ const Room = ({ className, id }) => {
     useEffect(() => {
         socket.emit("room:join", { id });
         socket.on("room:update", (data) => {
-            console.log("update");
-            console.log(data.state);
             setRoom(data);
         });
     }, []);
