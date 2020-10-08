@@ -37,13 +37,16 @@ const UserListClass = (theme) => {
         max-height: 25rem;
         background: ${theme.background.light};
         border-radius: 6px;
+        overflow: auto;
+
+        &:after {
+            content: "";
+            display: block;
+            height: 24px;
+            width: 100%;
+        }
     `;
 };
-
-const UserListWrapper = css`
-    height: 100%;
-    overflow: auto;
-`;
 
 const DividerClass = (theme) => {
     return css`
@@ -60,22 +63,25 @@ const UserList = ({ room }) => {
     const users = room.users.filter((user) => user !== owner);
 
     return (
-        <Block elevation={2} padding={3} className={UserListClass(theme)}>
-            <div class={UserListWrapper}>
-                <User name={owner.name} guess={room.state.guesses[owner.id]} />
-                {users.map((user, i) => {
-                    return (
-                        <>
-                            <Gap vertical size={1} />
-                            <User
-                                key={user.id}
-                                name={user.name}
-                                guess={room.state.guesses[user.id]}
-                            />
-                        </>
-                    );
-                })}
-            </div>
+        <Block
+            elevation={2}
+            padding={3}
+            style={{ paddingBottom: 0 }}
+            className={UserListClass(theme)}
+        >
+            <User name={owner.name} guess={room.state.guesses[owner.id]} />
+            {users.map((user, i) => {
+                return (
+                    <>
+                        <Gap vertical size={1} />
+                        <User
+                            key={user.id}
+                            name={user.name}
+                            guess={room.state.guesses[user.id]}
+                        />
+                    </>
+                );
+            })}
         </Block>
     );
 };
