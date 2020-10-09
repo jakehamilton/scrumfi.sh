@@ -1,2 +1,5 @@
 public/*
 !public/index.html
+!public/images
+!public/favicon.ico
+!public/manifest.json
