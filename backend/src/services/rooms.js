@@ -5,6 +5,7 @@ class RoomsService extends Service {
     config = {
         dependencies: {
             plugins: ["websocket"],
+            services: ["names"],
         },
     };
 
@@ -45,11 +46,13 @@ class RoomsService extends Service {
 
         if (room.users.size === 0) {
             this.rooms.delete(id);
-        }
+        } else {
+            if (room.owner === socket) {
+                const [newOwner] = room.users;
+                room.owner = newOwner;
+            }
 
-        if (room.owner === socket) {
-            const [newOwner] = room.users;
-            room.owner = newOwner;
+            this.update(id);
         }
     }
 
