@@ -39,6 +39,7 @@ const UserListClass = (theme) => {
         overflow-y: auto;
         background: ${theme.background.light};
         border-radius: 6px;
+        padding-bottom: 0px !important;
     `;
 };
 
@@ -71,6 +72,7 @@ const UserList = ({ room }) => {
                     </>
                 );
             })}
+            <Gap vertical size={2} />
         </Block>
     );
 };
