@@ -28,7 +28,8 @@ const main = async () => {
         require("./components/websocket/room/join"),
         require("./components/websocket/room/start"),
         require("./components/websocket/room/guess"),
-        require("./components/websocket/room/end")
+        require("./components/websocket/room/end"),
+        require("./components/websocket/room/leave")
     );
 
     http.listen(PORT);

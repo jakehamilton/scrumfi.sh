@@ -35,7 +35,7 @@ const Content = ({ room }) => {
 };
 
 const Room = ({ className, id }) => {
-    const { socket, user } = useSocket();
+    const { socket } = useSocket();
 
     const [room, setRoom] = useState(null);
 
@@ -44,6 +44,10 @@ const Room = ({ className, id }) => {
         socket.on("room:update", (data) => {
             setRoom(data);
         });
+
+        return () => {
+            socket.emit("room:leave", { id });
+        };
     }, []);
 
     return (
