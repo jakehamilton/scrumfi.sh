@@ -1,7 +1,6 @@
 const { Service } = require("@leverage/core");
 const {
     uniqueNamesGenerator,
-    Config,
     adjectives,
     colors,
     animals,
@@ -20,8 +19,14 @@ const userConfig = {
 class NamesService extends Service {
     name = "names";
 
-    ids = new Map();
-    users = new Map();
+    ids = new Set();
+    users = new Set();
+
+    freeId(id) {
+        if (this.ids.has(id)) {
+            this.ids.delete(id);
+        }
+    }
 
     id() {
         let id;
@@ -30,24 +35,32 @@ class NamesService extends Service {
             id = uniqueNamesGenerator(idConfig);
         } while (!id || this.ids.has(id));
 
-        this.ids.set(id);
+        this.ids.add(id);
 
         return id;
     }
 
+    freeUser(id) {
+        if (this.users.has(id)) {
+            this.users.delete(id);
+        }
+    }
+
     user() {
-        let user;
+        let id;
 
         do {
-            user = uniqueNamesGenerator(userConfig);
-        } while (!user || this.users.has(user));
+            id = uniqueNamesGenerator(userConfig);
+        } while (!id || this.users.has(id));
 
-        this.users.set(user);
-
-        return user
+        const name = id
             .split(userConfig.separator)
             .map((word) => word[0].toUpperCase() + word.slice(1))
             .join(userConfig.separator);
+
+        this.users.add(name);
+
+        return name;
     }
 }
 

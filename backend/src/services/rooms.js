@@ -46,6 +46,7 @@ class RoomsService extends Service {
 
         if (room.users.size === 0) {
             this.rooms.delete(id);
+            this.services.names.freeId(id);
         } else {
             if (room.owner === socket) {
                 const [newOwner] = room.users;

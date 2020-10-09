@@ -15,6 +15,8 @@ class WebSocketComponent extends Component {
         if (socket.room) {
             this.services.rooms.leave(socket.room, socket);
         }
+
+        this.services.names.freeUser(socket.user.name);
     }
 }
 
