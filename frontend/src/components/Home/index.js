@@ -17,7 +17,7 @@ const FishClass = css`
 `;
 
 const Home = ({ className }) => {
-    const { socket, user } = useSocket();
+    const { socket } = useSocket();
 
     const handleCreateRoom = () => {
         socket.emit("room:create");

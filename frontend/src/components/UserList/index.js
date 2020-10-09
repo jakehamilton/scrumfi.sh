@@ -30,7 +30,7 @@ const User = ({ name, guess }) => {
     );
 };
 
-const UserListClass = (theme) => {
+const UserListClass = ({ theme }) => {
     return css`
         width: 100%;
         max-width: 30rem;
@@ -43,16 +43,8 @@ const UserListClass = (theme) => {
     `;
 };
 
-const DividerClass = (theme) => {
-    return css`
-        height: 2px;
-        background: ${theme.background.main};
-    `;
-};
-
 const UserList = ({ room }) => {
-    const { socket, user } = useSocket();
-    const { theme } = useTheme();
+    const theme = useTheme();
 
     const owner = room.users.find((user) => user.id === room.owner);
     const users = room.users.filter((user) => user !== owner);

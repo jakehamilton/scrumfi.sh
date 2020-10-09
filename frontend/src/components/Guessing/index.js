@@ -17,10 +17,11 @@ const CardsClass = css`
     flex-wrap: wrap;
 `;
 
-const CardClass = ({ margin }) => {
+const CardClass = ({ pad }) => {
     return css`
-        margin-right: ${margin}px;
-        margin-bottom: ${margin}px;
+        margin-left: ${pad(1)}px;
+        margin-right: ${pad(1)}px;
+        margin-bottom: ${pad(2)}px;
     `;
 };
 
@@ -28,7 +29,7 @@ const values = [1, 2, 3, 5, 8, 13];
 
 const Guessing = ({ room }) => {
     const { socket, user } = useSocket();
-    const { pad } = useTheme();
+    const theme = useTheme();
 
     const guess = room.state.guesses[user.id];
 
@@ -53,9 +54,7 @@ const Guessing = ({ room }) => {
                             key={value}
                             value={value}
                             onClick={handleGuess}
-                            className={CardClass({
-                                margin: pad(2),
-                            })}
+                            className={CardClass(theme)}
                             active={guess && guess.value === value}
                         />
                     );

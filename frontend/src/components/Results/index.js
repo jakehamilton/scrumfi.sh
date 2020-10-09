@@ -15,10 +15,11 @@ const CardsClass = css`
     flex-wrap: wrap;
 `;
 
-const CardClass = ({ margin }) => {
+const CardClass = ({ pad }) => {
     return css`
-        margin-right: ${margin}px;
-        margin-bottom: ${margin}px;
+        margin-left: ${pad(1)}px;
+        margin-right: ${pad(1)}px;
+        margin-bottom: ${pad(2)}px;
     `;
 };
 
@@ -27,7 +28,7 @@ const CardSubtitleClass = css`
 `;
 
 const Results = ({ room }) => {
-    const { pad } = useTheme();
+    const theme = useTheme();
 
     const ids = Object.keys(room.state.guesses);
 
@@ -57,7 +58,7 @@ const Results = ({ room }) => {
                                     </Text>
                                 ) : undefined
                             }
-                            className={CardClass({ margin: pad(2) })}
+                            className={CardClass(theme)}
                         />
                     );
                 })}

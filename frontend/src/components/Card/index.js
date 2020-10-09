@@ -5,48 +5,37 @@ import { Block, Text, useTheme, H1, H4, Button } from "@jakehamilton/ui";
 
 import { noop } from "../../util/misc";
 
-const CardClass = ({
-    background,
-    justify,
-    shadow,
-    hoverShadow,
-    activeShadow,
-    primary,
-    active,
-    size,
-}) => {
-    const primaryShadow = active ? `0 0 10px ${primary}` : "0 0 0 transparent";
+const CardClass = ({ theme, shadow, active, subtitle }) => {
+    const primaryShadow = active
+        ? `0 0 10px ${theme.primary.main}`
+        : "0 0 0 transparent";
 
     return css`
         display: flex;
         align-items: center;
-        justify-content: ${justify};
+        justify-content: ${subtitle ? "space-around" : "center"};
         flex-direction: column;
         cursor: pointer;
         width: 8rem;
         height: 10rem;
         border-radius: 0.5rem;
-        background: ${background};
-        box-shadow: ${primaryShadow}, ${shadow};
+        background: ${theme.background.light};
+        box-shadow: ${primaryShadow}, ${shadow(3)};
         transform: translateY(0);
         transition: box-shadow 0.15s linear, transform 0.15s linear;
         user-select: none;
 
         &:hover {
-            box-shadow: ${primaryShadow}, ${hoverShadow};
+            box-shadow: ${primaryShadow}, ${shadow(4)};
             transform: translateY(-2px);
         }
 
         &:active {
-            box-shadow: ${primaryShadow}, ${activeShadow};
+            box-shadow: ${primaryShadow}, ${shadow(2)};
             transform: translateY(0);
         }
     `;
 };
-
-const CardValueClass = css``;
-
-const CardSubtitleClass = css``;
 
 const Card = ({
     value,
@@ -55,7 +44,7 @@ const Card = ({
     active = false,
     className,
 }) => {
-    const { theme, shadow } = useTheme();
+    const theme = useTheme();
 
     const handleClick = () => {
         onClick({ value });
@@ -65,13 +54,8 @@ const Card = ({
         <Block
             className={cn(
                 CardClass({
-                    background: theme.background.light,
-                    activeBackground: theme.background.main,
-                    justify: subtitle ? "space-around" : "center",
-                    shadow: shadow(3),
-                    hoverShadow: shadow(4),
-                    activeShadow: shadow(2),
-                    primary: theme.primary.main,
+                    ...theme,
+                    subtitle,
                     active,
                 }),
                 className
@@ -80,11 +64,11 @@ const Card = ({
             padding={2}
         >
             <H1 as="span">
-                <Text className={CardValueClass}>{value}</Text>
+                <Text>{value}</Text>
             </H1>
             {subtitle ? (
                 <H4 as="span">
-                    <Text className={CardSubtitleClass}>{subtitle}</Text>
+                    <Text>{subtitle}</Text>
                 </H4>
             ) : null}
         </Block>
