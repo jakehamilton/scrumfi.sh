@@ -18,10 +18,16 @@ const AppClass = ({ background }) => css`
 
 const AppBarClass = css`
     flex-shrink: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9;
 `;
 
 const AppContentClass = css`
     flex-grow: 1;
+    padding: 70px 20px 20px;
 `;
 
 const App = () => {
