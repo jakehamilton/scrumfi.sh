@@ -115,5 +115,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Testing
 tmp
+
+# macOS
 .DS_Store
+
+# Nix
+result
